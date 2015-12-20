@@ -1,2 +1,3 @@
 college/settings.py
 college/*.pyc
+authentication/*.pyc

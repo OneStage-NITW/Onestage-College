@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'cap',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -80,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'onestage',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'vivek123',
         'HOST': 'localhost',
     'PORT': '', 
     }
