@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+def get_image_path(instance,filename):
+    return 'organisation{0}'.format(instance.name)
 
 class Platform(models.Model):
 	name = models.CharField(max_length=180)
@@ -25,6 +27,16 @@ class PlatformDetails(models.Model):
 	no_of_people=models.CharField(max_length=180)
 	def __unicode__(self):
 		return self.platform.name
+
+class Organisation(models.Model):
+	name=models.CharField(max_length=180,unique=True)
+	description=models.TextField()
+	logo=models.ImageField(upload_to=get_image_path, null=True,blank=True)
+	address=models.TextField()
+	def __unicode__(self):
+		return self.name
+
+
     
 
 
