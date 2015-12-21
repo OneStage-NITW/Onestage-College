@@ -18,21 +18,23 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-def login(request):
+def loginuser(request):
 	response={}
 	if request.method=="POST":
-		username=request.POST.get('email',False)
 		email = request.POST['email']
 		password = request.POST['password']
-		# mobile_id=request.POST['id']
+		# user= User.objects.get(username=email,password=password)
 		user = authenticate(username=email, password=password)
 		if user is not None:
+			print "Entered 1"
 			if user.is_active:
+				print "Entered 2"
 				login(request, user)
 				user.lastLoginDate=datetime.now()
 				# user.userprofile.mobile_id=mobile_id
 				user.userprofile.loggedIn=True
 				user.save()
+				return render(request,'site/main.html',response)
 			else:
 				response['message']="Invalid user"
 		else:

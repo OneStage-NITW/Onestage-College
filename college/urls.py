@@ -22,5 +22,5 @@ from authentication import views as auth
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/',auth.login)
+    url(r'^login/',auth.loginuser)
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
