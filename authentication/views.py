@@ -18,8 +18,8 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-@csrf_exempt
-def _login(request):
+def login(request):
+	response={}
 	if request.method=="POST":
 		username=request.POST.get('email',False)
 		email = request.POST['email']
@@ -33,11 +33,11 @@ def _login(request):
 				# user.userprofile.mobile_id=mobile_id
 				user.userprofile.loggedIn=True
 				user.save()
-				return JsonResponse({'success':1,'message':'Success','email': email,'id':user.id})
 			else:
-				return JsonResponse({'success':0,'message':'Inactive'}) 
+				response['message']="Invalid user"
 		else:
-			return JsonResponse({'success':0,'message':'Email/Password incorrect'})
+			response['message']="User name or password wrong"
+	return render(request,'site/login.html',response)
 
 
 @csrf_exempt

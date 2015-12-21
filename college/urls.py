@@ -18,7 +18,9 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from authentication import views as auth
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^login/',auth.login)
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
