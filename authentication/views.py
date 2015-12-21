@@ -18,43 +18,37 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+def home(request):
+	if not request.user.is_authenticated():
+		return HttpResponseRedirect('/login')
+	else:
+		response={}
+		response['user']=request.user
+		response['userprofile']=request.user.userprofile
+		return render(request,'site/main.html',response)
+
 def loginuser(request):
 	response={}
 	if request.method=="POST":
 		email = request.POST['email']
 		password = request.POST['password']
-		# user= User.objects.get(username=email,password=password)
 		user = authenticate(username=email, password=password)
 		if user is not None:
-			print "Entered 1"
 			if user.is_active:
-				print "Entered 2"
 				login(request, user)
 				user.lastLoginDate=datetime.now()
-				# user.userprofile.mobile_id=mobile_id
 				user.userprofile.loggedIn=True
 				user.save()
-				return render(request,'site/main.html',response)
+				return HttpResponseRedirect('/home')
 			else:
 				response['message']="Invalid user"
 		else:
 			response['message']="User name or password wrong"
 	return render(request,'site/login.html',response)
 
-
-@csrf_exempt
-def _logout(request):
-	if request.method == "POST":
-		userid=request.POST['id']
-		user = User.objects.get(id=userid)
-		if user is not None:
-			user.userprofile.loggedIn=False
-			user.save()
-			return JsonResponse({'success':1})
-		else:
-			return JsonResponse({'success':0, 'message': "Invalid userid"})
-	return JsonResponse({'success': 0, 'message': 'Invalid method'})
-
+def logoutuser(request):
+	logout(request)
+	return HttpResponseRedirect('/login')
 
 @csrf_exempt
 def register(request):	
@@ -64,7 +58,6 @@ def register(request):
 		method=request.POST['method']
 		user_form = UserForm(data=request.POST)
 		profile_form = UserProfileForm(data=request.POST)
-		# mobile_id=request.POST['mobile_id']
 		print profile_form
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save(commit=False)
