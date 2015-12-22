@@ -211,7 +211,7 @@
                             </li>
                             {% endif %}
                             <!-- Dropdown-->
-                            {% if superuser == 1 %}
+                            {% if onestage == 1 %}
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-example">
                                     <span class="icon fa fa-slack"></span><span class="title">Manage</span>
@@ -220,11 +220,11 @@
                                 <div id="dropdown-example" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="pages/login.html">Manage Organizations</a>
+                                            <li><a href="#">Manage Organizations</a>
                                             </li>
                                             <li><a href="pages/index.html">Manage CAP</a>
                                             </li>
-                                            <li><a href="pages/index.html">Manage Onestage Admins</a>
+                                            <li><a href="/manageonstage">Invite Onestage Members</a>
                                             </li>
                                         </ul>
                                     </div>

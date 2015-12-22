@@ -9,6 +9,7 @@ class UserProfile(models.Model):
 	TYPE_CHOICES = (
 	    ('Organisation', 'Organisation'),
 	    ('CAP', 'CAP'),
+	    ('Onestage','Onestage')
 	)
 	user = models.OneToOneField(User)
 	collegeName = models.CharField(max_length=128,default="NIT")
@@ -18,5 +19,7 @@ class UserProfile(models.Model):
 	loggedIn=models.BooleanField(default=False)
 	usertype=models.CharField(max_length=180,choices=TYPE_CHOICES,default='organisation')
 	profilepicture=models.ImageField(upload_to=get_image_path, null=True,blank=True)
+	role=models.CharField(max_length=180,null=True)
+	confirmed=models.BooleanField(default=False)
 	def __unicode__(self):
 		return self.user.username
