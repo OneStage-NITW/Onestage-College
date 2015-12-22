@@ -21,6 +21,7 @@ from django.conf import settings
 from authentication import views as auth
 
 urlpatterns = [
+    url(r'^$',auth.index),
     url(r'^admin/', admin.site.urls),
     url(r'^login/',auth.loginuser),
     url(r'^logout/',auth.logoutuser),

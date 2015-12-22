@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from authentication.models import UserProfile
 from authentication.forms import UserForm,UserProfileForm
 from datetime import datetime
@@ -18,6 +18,12 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+def index(request):
+	if not request.user.is_authenticated():
+		return HttpResponseRedirect('/login')
+	else:
+		return HttpResponseRedirect('/home')
+
 def home(request):
 	if not request.user.is_authenticated():
 		return HttpResponseRedirect('/login')
@@ -25,6 +31,12 @@ def home(request):
 		response={}
 		response['user']=request.user
 		response['userprofile']=request.user.userprofile
+		if request.user.is_superuser:
+			response['superuser']=1
+		elif request.user.groups.filter(name='Organisation').count() == 1:
+			response['organisation']=1
+		elif request.user.groups.filter(name='CAP').count() == 1:
+			response['cap']=1
 		return render(request,'site/main.html',response)
 
 def loginuser(request):
