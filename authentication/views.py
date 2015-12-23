@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 import hashlib
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -84,4 +85,72 @@ def getonestageusers(request):
 		return render(request,'site/onestageusers.html',response)
 	else:
 		return HttpResponseNotFound('<h1>Page not found</h1>')
+
+
+@csrf_exempt
+def register_2(request):	
+	registered = False
+	flag=0
+	response={}
+	response['success']=0
+	if request.method == "POST":
+		method=request.POST['method']
+		profile=UserProfile()
+		name=request.POST['name']
+		email=request.POST['email']
+		password=""
+		if method == 'normal':
+			password=request.POST['password']
+		mobile_id=request.POST['mobile_id']
+		try:
+			user=User.objects.get(username=email)
+		except User.DoesNotExist:
+			user=User()
+			flag=1
+		if flag == 1:
+			user.first_name=name
+			user.username=email
+			user.password=password
+			user.set_password(user.password)
+			user.is_active=True
+			user.save()
+			profile.user = user
+			profile.mobile_id=mobile_id
+			profile.lastLoginDate = datetime.now()
+			profile.ipaddress=get_client_ip(request)
+			profile.save()
+			registered = True
+			response['success']=1
+			response['email']=email
+			response['id']=user.id
+		else:
+			user.userprofile.mobile_id=mobile_id
+			user.first_name=name
+			user.userprofile.save()
+			user.save()
+			response['success']=1
+			response['message']="User is already present"
+			response['email']=user.username
+			response['id']=user.id
+	return JsonResponse(response)
+
+
+def inviteuser(request):
+	if request.method == 'POST':
+		utype=request.POST['type']
+		email=request.POST['email']
+		password=hashlib.sha224(email).hexdigest()
+		# user=User()
+		# user.username=email
+		# user.set_password(password)
+		# user.is_active=False
+		# user.save()
+		rurl='newuser?type='+utype+'code='+password
+		url='http://127.0.0.1:8000/'+rurl
+		message='Please click this link for registering: '+url
+		send_mail('Invite for new user',message,'root@onestage.com',[email],fail_silently=False)
+		response['message']='Invite is sent'
+
+
+		
 

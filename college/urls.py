@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^login/',auth.loginuser),
     url(r'^logout/',auth.logoutuser),
     url(r'^home/',auth.home),  
-    url(r'^manageonstage/',auth.getonestageusers),  
+    url(r'^manageonstage/',auth.getonestageusers), 
+    url(r'^invitenewuser/',auth.inviteuser),  
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
