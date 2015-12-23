@@ -20,6 +20,5 @@ class UserProfile(models.Model):
 	usertype=models.CharField(max_length=180,choices=TYPE_CHOICES,default='organisation')
 	profilepicture=models.ImageField(upload_to=get_image_path, null=True,blank=True)
 	role=models.CharField(max_length=180,null=True)
-	confirmed=models.BooleanField(default=False)
 	def __unicode__(self):
 		return self.user.username

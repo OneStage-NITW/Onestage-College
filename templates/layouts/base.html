@@ -90,7 +90,7 @@
                             <ul class="dropdown-menu animated fadeInDown">
                                 <li class="profile-img">
                                 <!-- static profile pic -->
-                                    <img src="/media/{{userprofile.profilepicture}}" class="profile-img">
+                                    <img src="/media/{{user.userprofile.profilepicture}}" class="profile-img">
                                 </li>
                                 <li>
                                     <div class="profile-info">
@@ -266,7 +266,10 @@
             <script type="text/javascript" src="{%static 'lib/js/ace/theme-github.js' %}"></script>
             <!-- Javascript -->
             <script type="text/javascript" src="{%static 'js/app.js' %}"></script>
-            <script type="text/javascript" src="{%static 'js/index.js' %}"></script>
+            <script type="text/javascript" src="{%static 'js/js.cookie.js' %}"></script>
+            <script type="text/javascript" src="{%static 'js/custom.js' %}"></script>
+            {%block scripts%}
+            {%endblock%}
 </body>
 
 </html>

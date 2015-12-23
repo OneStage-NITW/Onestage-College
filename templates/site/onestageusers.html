@@ -10,16 +10,20 @@
                     <h4 class="modal-title" id="myModalLabel">Invite Onestage Member</h4>
                 </div>
                 <div class="modal-body">
+                    <div id="message-div">
+                        <div id='messages' class="alert alert-warning alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
                     <form action="/invitenewuser/" method="POST">
-                     {% csrf_token %}
                     	<div class="control">
-                            <input type="text" name="email" class="form-control" placeholder="admin@gmail.com" />
+                            <input id='inviteemail' type="text" name="email" class="form-control" placeholder="admin@gmail.com" />
                          </div>
-                         <input type="hidden" name="type" value="onestage"/>
+                         <input id='invitetype' type="hidden" name="type" value="onestage"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btn-primary" value="Invite EmailID">
+                    <button type="button" id="inviteonestageuser" class="btn btn-primary">Invite EmailID</button>
                 </div>
                 </form>
             </div>
@@ -36,4 +40,29 @@
     </li>
 {% endfor %}
 </ul>
+{%endblock%}
+{%block scripts%}
+<script type="text/javascript">
+    $('#message-div').hide();
+
+    $('#inviteonestageuser').click(function(){
+        purl='/invitenewuser/';
+        email=$('#inviteemail').val();
+        type=$('#invitetype').val();
+        console.log(email+':'+type);
+        $.ajax({
+            url : purl, 
+            type : "POST", 
+            data : {'email': email, 'utype': type}, 
+            success : function(json) {
+                $('#messages').append('<span>Invite has been sent</span>');
+                $('#message-div').show();
+            },
+            error : function(xhr,errmsg,err) {
+                $('#messages').append('<span>An error has occured. Please try again</span>');
+                $('#message-div').show();
+            }
+        });
+    });
+</script>
 {%endblock%}

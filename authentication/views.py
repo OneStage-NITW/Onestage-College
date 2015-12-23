@@ -136,8 +136,9 @@ def register_2(request):
 
 
 def inviteuser(request):
+	response={}
 	if request.method == 'POST':
-		utype=request.POST['type']
+		utype=request.POST['utype']
 		email=request.POST['email']
 		password=hashlib.sha224(email).hexdigest()
 		# user=User()
@@ -145,11 +146,48 @@ def inviteuser(request):
 		# user.set_password(password)
 		# user.is_active=False
 		# user.save()
-		rurl='newuser?type='+utype+'code='+password
+		rurl='newuser?type='+utype+'&code='+password+'&email='+email
 		url='http://127.0.0.1:8000/'+rurl
 		message='Please click this link for registering: '+url
 		send_mail('Invite for new user',message,'root@onestage.com',[email],fail_silently=False)
-		response['message']='Invite is sent'
+		response['success']=1
+	return JsonResponse(response)
+
+def newuser(request):
+	code=request.GET['code']
+	email=request.GET['email']
+	utype=request.GET['type']
+	registered = False
+	if request.method == "POST":
+		user_form = UserForm(data=request.POST)
+		profile_form = UserProfileForm(data=request.POST)
+		print profile_form
+		print request.FILES['picture']
+		if user_form.is_valid() and profile_form.is_valid():
+			
+			user = user_form.save(commit=False)
+			user.set_password(user.password)
+			user.is_active=True
+			user.save()
+			profile = profile_form.save(commit=False)
+			profile.user = user
+			profile.lastLoginDate = datetime.now()
+			profile.ipaddress=get_client_ip(request)
+			if request.FILES['picture']:
+				profile.picture = request.FILES['picture']
+			profile.save()
+			registered = True
+		else:
+			print user_form.errors, profile_form.errors
+			messages.info(request,str(user_form.errors)+str(profile_form.errors))
+	else:
+		user_form = UserForm()
+		profile_form = UserProfileForm()
+	return render(request,'site/register.html',{'title':'Sign Up','current_page':'register',\
+		'user_form':user_form,'profile_form':profile_form,'registered':registered})
+
+
+
 
 
 		
