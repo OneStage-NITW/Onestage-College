@@ -112,6 +112,8 @@ def newuser(request,utype,password,email):
 					userp=UserProfile()
 					userp.user=user
 					userp.collegeName=request.POST['collegeName']
+					userp.phone=request.POST['telephone']
+					userp.description=request.POST['description']
 					userp.usertype=utype
 					if request.FILES['picture']:
 						userp.profilepicture=request.FILES['picture']
@@ -130,6 +132,38 @@ def newuser(request,utype,password,email):
 	response['password']=password
 	response['email']=email
 	return render(request,'site/registernewuser.html',response)
+
+
+def viewprofile(request,utype,userid):
+	response={}
+	try:
+		user=User.objects.get(id=userid)
+	except:
+		return HttpResponseNotFound('<h1>Not found</h1>')
+	if user.userprofile.usertype == utype:
+		if utype == 'Organization':
+			"""
+			This is the part for the Organization view
+			Need to show the cost made by organization and the platforms its collabarating with
+			"""
+		elif utype == 'CAP':
+			"""
+			This is the part for the CAP view
+			Need to show volunteers for the Campus ambassador of the college
+			and the platforms conducted by them
+			"""
+		elif utype == 'Onestage':
+			"""
+			Need to show the Onestage main member
+			Need to show the role and the description
+			"""
+		response['vuser']=user
+		return render(request,'site/viewprofile.html',response)
+	else:
+		return HttpResponseNotFound('<h1>Not found</h1>')
+
+
+
 
 
 

@@ -1,0 +1,23 @@
+{%extends "layouts/base.html" %}
+{%block content %}
+<div class="row">
+	<div class="col-xs-6"><img src="/media/{{vuser.userprofile.profilepicture}}" class="img-responsive"></div>
+	<div class="col-xs-6">
+		<h2>{{vuser.first_name}}</h2>
+		<h4>{{vuser.userprofile.usertype}}</h4>
+		<div class="row">
+			<div class="col-xs-6">
+				<a href="mail:{{vuser.username}}" class="btn btn-primary col-xs-12"><span class="icon fa fa-paper-plane"></span><span class="title">   Mail</span></a>
+			</div>
+			<div class="col-xs-6">
+				<a href="tel:{{vuser.userprofile.phone}}" class="btn btn-success col-xs-12"><span class="icon fa fa-phone"></span><span class="title">   Call</span></a>
+			</div>
+		</div>	
+		<div class="row">
+			<div class="col-xs-12">
+				{{vuser.userprofile.description}}
+			</div>
+		</div>			
+	</div>
+</div>		
+{%endblock%}

@@ -31,14 +31,20 @@
     </div>
 </div>
 <ul class="list-group">
+{% if ousers %}
 {% for u in ousers %}
     <li class="list-group-item">
     <div class="row">
-    	<div class="col-xs-6"><h4>{{ u.username }}</h4><br>{{ u.first_name }}</div>
-    	<div class="col-xs-6"><a type="button" class="btn btn-success" href="#">View Profile</a></div>
+    	<div class="col-xs-6"><h4>{{ u.userprofile.collegeName }}</h4><br>{{ u.first_name }}</div>
+    	<div class="col-xs-6"><a type="button" class="btn btn-success col-xs-12" href="/viewprofile/{{utype}}/{{u.id}}">View Profile</a></div>
     </div>
     </li>
 {% endfor %}
+{%else%}
+ <li class="list-group-item" align="center">
+    No Members in this group yet
+    </li>
+{%endif%}
 </ul>
 {%endblock%}
 {%block scripts%}
