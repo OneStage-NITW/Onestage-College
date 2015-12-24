@@ -141,50 +141,55 @@ def inviteuser(request):
 		utype=request.POST['utype']
 		email=request.POST['email']
 		password=hashlib.sha224(email).hexdigest()
-		# user=User()
-		# user.username=email
-		# user.set_password(password)
-		# user.is_active=False
-		# user.save()
-		rurl='newuser?type='+utype+'&code='+password+'&email='+email
+		user=User()
+		user.username=email
+		user.set_password(password)
+		user.is_active=False
+		user.save()
+		rurl='newuser/'+utype+'/'+password+'/'+email+'/'
 		url='http://127.0.0.1:8000/'+rurl
 		message='Please click this link for registering: '+url
 		send_mail('Invite for new user',message,'root@onestage.com',[email],fail_silently=False)
 		response['success']=1
 	return JsonResponse(response)
 
-def newuser(request):
-	code=request.GET['code']
-	email=request.GET['email']
-	utype=request.GET['type']
-	registered = False
+def newuser(request,utype,password,email):
+	response={}
 	if request.method == "POST":
-		user_form = UserForm(data=request.POST)
-		profile_form = UserProfileForm(data=request.POST)
-		print profile_form
-		print request.FILES['picture']
-		if user_form.is_valid() and profile_form.is_valid():
-			
-			user = user_form.save(commit=False)
-			user.set_password(user.password)
-			user.is_active=True
-			user.save()
-			profile = profile_form.save(commit=False)
-			profile.user = user
-			profile.lastLoginDate = datetime.now()
-			profile.ipaddress=get_client_ip(request)
-			if request.FILES['picture']:
-				profile.picture = request.FILES['picture']
-			profile.save()
-			registered = True
+		user=authenticate(username=email, password=password)
+		if user is not None:
+			if not user.is_active:
+				print "User is registering"
+				first_name=request.POST['first_name']
+				password=request.POST['password']
+				conpassword=request.POST['conpassword']
+				if password == conpassword:
+					user.set_password(password)
+					user.first_name=first_name
+					user.is_active=True
+					user.save()
+					userp=UserProfile()
+					userp.user=user
+					userp.collegeName=request.POST['collegeName']
+					userp.usertype=utype
+					if request.FILES['picture']:
+						userp.profilepicture=request.FILES['picture']
+					else:
+						userp.profilepicture='default.jpg'
+					userp.lastLoginDate=datetime.now()
+					userp.save()
+					return HttpResponseRedirect('/login')
+				else:
+					response['message']="Password not matching"
+			else:
+				response['message']='User already active'
 		else:
-			print user_form.errors, profile_form.errors
-			messages.info(request,str(user_form.errors)+str(profile_form.errors))
-	else:
-		user_form = UserForm()
-		profile_form = UserProfileForm()
-	return render(request,'site/register.html',{'title':'Sign Up','current_page':'register',\
-		'user_form':user_form,'profile_form':profile_form,'registered':registered})
+			response['message']='User is not allowed to be registered'
+	response['utype']=utype
+	response['password']=password
+	response['email']=email
+	return render(request,'site/registernewuser.html',response)
+
 
 
 

@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^logout/',auth.logoutuser),
     url(r'^home/',auth.home),  
     url(r'^manageonstage/',auth.getonestageusers), 
-    url(r'^invitenewuser/',auth.inviteuser),  
+    url(r'^invitenewuser/',auth.inviteuser), 
+    url(r'^newuser/(?P<utype>\w+)/(?P<password>\w+)/(?P<email>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/',auth.newuser),  
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
