@@ -36,6 +36,12 @@ class Organisation(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class Volunteers(models.Model):
+	college=models.ForeignKey(User,related_name='collegeadmin')
+	vol=models.ForeignKey(User,related_name='volunteer')
+	def __unicode__(self):
+		return self.college.first_name+" : "+self.vol.first_name
+
 
     
 

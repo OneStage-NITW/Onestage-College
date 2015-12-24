@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication',
+    'ckeditor',
     'cap',
 ]
 
@@ -125,11 +126,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(os.path.dirname(__file__),'../static').replace('\\','/')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(os.path.dirname(__file__),'../media').replace('\\','/')
-
 MEDIA_URL = "/media/"
 
-STATICFILES_DIRS = ('./static',)
+STATICFILES_DIRS = ('./static2',)
 

@@ -35,7 +35,7 @@
 {% for u in ousers %}
     <li class="list-group-item">
     <div class="row">
-    	<div class="col-xs-6"><h4>{{ u.userprofile.collegeName }}</h4><br>{{ u.first_name }}</div>
+    	<div class="col-xs-6"><h4>{{ u.first_name }}</h4><br>{{ u.userprofile.collegeName }}</div>
     	<div class="col-xs-6"><a type="button" class="btn btn-success col-xs-12" href="/viewprofile/{{utype}}/{{u.id}}">View Profile</a></div>
     </div>
     </li>
