@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^login/',auth.loginuser),
     url(r'^logout/',auth.logoutuser),
     url(r'^home/',auth.home),  
-    url(r'^manageonstage/',auth.getonestageusers), 
+    url(r'^manageonstage/(?P<utype>Onestage|CAP|Organization)/',auth.getusers), 
     url(r'^invitenewuser/',auth.inviteuser), 
     url(r'^newuser/(?P<utype>\w+)/(?P<password>\w+)/(?P<email>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/',auth.newuser),  
     

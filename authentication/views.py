@@ -3,7 +3,7 @@ from django.contrib.auth.models import User,Group
 from authentication.models import UserProfile
 from authentication.forms import UserForm,UserProfileForm
 from datetime import datetime
-from django.http import HttpResponseRedirect,JsonResponse
+from django.http import HttpResponseRedirect,JsonResponse,HttpResponseNotFound
 from django.contrib.auth import authenticate,login,logout
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -32,15 +32,6 @@ def home(request):
 	else:
 		response={}
 		response['user']=request.user
-		response['userprofile']=request.user.userprofile
-		if request.user.groups.filter(name='Onestage').count() == 1:
-			response['onestage']=1
-		if request.user.is_superuser:
-			response['superuser']=1
-		elif request.user.groups.filter(name='Organisation').count() == 1:
-			response['organisation']=1
-		elif request.user.groups.filter(name='CAP').count() == 1:
-			response['cap']=1
 		return render(request,'site/main.html',response)
 
 def loginuser(request):
@@ -77,62 +68,12 @@ def newuser(request):
 	else:
 		return HttpResponseNotFound('<h1>Page not found</h1>')
 
-def getonestageusers(request):
+def getusers(request,utype):
 	response={}
-	if request.user.groups.filter(name='Onestage').count() == 1:
-		users=User.objects.filter(groups__name='onestage')
-		response['ousers']=users
-		return render(request,'site/onestageusers.html',response)
-	else:
-		return HttpResponseNotFound('<h1>Page not found</h1>')
-
-
-@csrf_exempt
-def register_2(request):	
-	registered = False
-	flag=0
-	response={}
-	response['success']=0
-	if request.method == "POST":
-		method=request.POST['method']
-		profile=UserProfile()
-		name=request.POST['name']
-		email=request.POST['email']
-		password=""
-		if method == 'normal':
-			password=request.POST['password']
-		mobile_id=request.POST['mobile_id']
-		try:
-			user=User.objects.get(username=email)
-		except User.DoesNotExist:
-			user=User()
-			flag=1
-		if flag == 1:
-			user.first_name=name
-			user.username=email
-			user.password=password
-			user.set_password(user.password)
-			user.is_active=True
-			user.save()
-			profile.user = user
-			profile.mobile_id=mobile_id
-			profile.lastLoginDate = datetime.now()
-			profile.ipaddress=get_client_ip(request)
-			profile.save()
-			registered = True
-			response['success']=1
-			response['email']=email
-			response['id']=user.id
-		else:
-			user.userprofile.mobile_id=mobile_id
-			user.first_name=name
-			user.userprofile.save()
-			user.save()
-			response['success']=1
-			response['message']="User is already present"
-			response['email']=user.username
-			response['id']=user.id
-	return JsonResponse(response)
+	users=User.objects.filter(userprofile__usertype=utype)
+	response['ousers']=users
+	response['utype']=utype
+	return render(request,'site/onestageusers.html',response)
 
 
 def inviteuser(request):

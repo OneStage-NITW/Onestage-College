@@ -175,7 +175,7 @@
                                     </div>
                                 </div>-->
                             </li>
-                            {% if cap == 1 %}
+                            {% if user.userprofile.usertype == 'CAP' %}
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-form">
                                     <span class="icon fa fa-file-text-o"></span><span class="title">Manage College Members</span>
@@ -192,7 +192,7 @@
                             </li>
                             {% endif %}
                             <!-- Dropdown-->
-                            {% if organization == 1 %}
+                            {% if user.userprofile.usertype == 'Organization' %}
                             <li class="panel panel-default">
                                 <a data-toggle="collapse" href="#component-example">
                                     <span class="icon fa fa-cubes"></span><span class="title">Manage Organization</span>
@@ -211,7 +211,7 @@
                             </li>
                             {% endif %}
                             <!-- Dropdown-->
-                            {% if onestage == 1 %}
+                            {% if user.userprofile.usertype == 'Onestage' %}
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-example">
                                     <span class="icon fa fa-slack"></span><span class="title">Manage</span>
@@ -220,11 +220,11 @@
                                 <div id="dropdown-example" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="#">Manage Organizations</a>
+                                            <li><a href="/manageonstage/Organization">Manage Organizations</a>
                                             </li>
-                                            <li><a href="pages/index.html">Manage CAP</a>
+                                            <li><a href="/manageonstage/CAP">Manage CAP</a>
                                             </li>
-                                            <li><a href="/manageonstage">Invite Onestage Members</a>
+                                            <li><a href="/manageonstage/Onestage">Invite Onestage Members</a>
                                             </li>
                                         </ul>
                                     </div>

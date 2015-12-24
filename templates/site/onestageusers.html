@@ -1,13 +1,13 @@
 {%extends "layouts/base.html" %}
 {%block content %}
 <div class="row">
-	<button type="button" class="btn btn-success col-xs-10 col-xs-offset-1" data-toggle="modal" data-target="#modalDefault">Invite Onestage User</button>
+	<button type="button" class="btn btn-success col-xs-10 col-xs-offset-1" data-toggle="modal" data-target="#modalDefault">Invite {{utype}} User</button>
         <div class="modal fade" id="modalDefault" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Invite Onestage Member</h4>
+                    <h4 class="modal-title" id="myModalLabel">Invite {{utype}} Member</h4>
                 </div>
                 <div class="modal-body">
                     <div id="message-div">
@@ -19,7 +19,7 @@
                     	<div class="control">
                             <input id='inviteemail' type="text" name="email" class="form-control" placeholder="admin@gmail.com" />
                          </div>
-                         <input id='invitetype' type="hidden" name="type" value="onestage"/>
+                         <input id='invitetype' type="hidden" name="type" value="{{utype}}"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -34,7 +34,7 @@
 {% for u in ousers %}
     <li class="list-group-item">
     <div class="row">
-    	<div class="col-xs-6"><h4>{{ u.username }}</h4><br>{{ u.email }}</div>
+    	<div class="col-xs-6"><h4>{{ u.username }}</h4><br>{{ u.first_name }}</div>
     	<div class="col-xs-6"><a type="button" class="btn btn-success" href="#">View Profile</a></div>
     </div>
     </li>
