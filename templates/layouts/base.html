@@ -120,12 +120,12 @@
                             </button>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li class="active">
-                                <a href="index.html">
+                            <li class="{%if page == 'home'%}active{%endif%}">
+                                <a href="/home/">
                                     <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                                 </a>
                             </li>
-                            <li class="panel panel-default dropdown">
+                            <li class="panel panel-default dropdown {%if page == 'platforms'%}active{%endif%}">
                                 <a data-toggle="collapse" href="#dropdown-element">
                                     <span class="icon fa fa-desktop"></span><span class="title">Platfroms</span>
                                 </a>
@@ -159,9 +159,9 @@
                                     </div>
                                 </div> -->
                             </li>
-                            <li class="panel panel-default dropdown">
+                            <li class="panel panel-default dropdown {%if page == 'organisation'%}active{%endif%}">
                                 <a data-toggle="collapse" href="#dropdown-table">
-                                    <span class="icon fa fa-table"></span><span class="title">Organizations</span>
+                                    <span class="icon fa fa-table"></span><span class="title">Organisations</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
                                 <!--<div id="dropdown-table" class="panel-collapse collapse">
@@ -176,7 +176,7 @@
                                 </div>-->
                             </li>
                             {% if user.userprofile.usertype == 'CAP' %}
-                            <li class="panel panel-default dropdown">
+                            <li class="panel panel-default dropdown {%if page == 'cap'%}active{%endif%}">
                                 <a data-toggle="collapse" href="#dropdown-form">
                                     <span class="icon fa fa-file-text-o"></span><span class="title">Manage College Members</span>
                                 </a>
@@ -193,7 +193,7 @@
                             {% endif %}
                             <!-- Dropdown-->
                             {% if user.userprofile.usertype == 'Organization' %}
-                            <li class="panel panel-default">
+                            <li class="panel panel-default {%if page == 'organisation'%}active{%endif%}">
                                 <a data-toggle="collapse" href="#component-example">
                                     <span class="icon fa fa-cubes"></span><span class="title">Manage Organization</span>
                                 </a>
@@ -212,7 +212,7 @@
                             {% endif %}
                             <!-- Dropdown-->
                             {% if user.userprofile.usertype == 'Onestage' %}
-                            <li class="panel panel-default dropdown">
+                            <li class="panel panel-default dropdown {%if page == 'onestage'%}active{%endif%}">
                                 <a data-toggle="collapse" href="#dropdown-example">
                                     <span class="icon fa fa-slack"></span><span class="title">Manage</span>
                                 </a>
@@ -222,7 +222,7 @@
                                         <ul class="nav navbar-nav">
                                             <li><a href="/manageonstage/Organization">Manage Organizations</a>
                                             </li>
-                                            <li><a href="/manageonstage/CAP">Manage CAP</a>
+                                            <li><a href="/manageonstage/CAP">Manage Colleges for CAP</a>
                                             </li>
                                             <li><a href="/manageonstage/Onestage">Invite Onestage Members</a>
                                             </li>

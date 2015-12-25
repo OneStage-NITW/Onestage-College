@@ -32,6 +32,7 @@ def home(request):
 	else:
 		response={}
 		response['user']=request.user
+		response['page']='home'
 		return render(request,'site/main.html',response)
 
 def loginuser(request):
@@ -73,6 +74,7 @@ def getusers(request,utype):
 	users=User.objects.filter(userprofile__usertype=utype)
 	response['ousers']=users
 	response['utype']=utype
+	response['page']='onestage'
 	return render(request,'site/onestageusers.html',response)
 
 
@@ -158,6 +160,7 @@ def viewprofile(request,utype,userid):
 			Need to show the role and the description
 			"""
 		response['vuser']=user
+		response['page']=utype.lower()
 		return render(request,'site/viewprofile.html',response)
 	else:
 		return HttpResponseNotFound('<h1>Not found</h1>')
