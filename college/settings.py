@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authentication',
     'ckeditor',
     'cap',
+    'homeapp',
 ]
 
 MIDDLEWARE_CLASSES = [
