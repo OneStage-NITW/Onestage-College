@@ -18,3 +18,5 @@ Run the following commands
 If you see the starting blue page you are good to go
 
 You are ready to go
+
+Current apps : authentication,cap,homeapp
