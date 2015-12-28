@@ -126,7 +126,7 @@
                                 </a>
                             </li>
                             <li class="panel panel-default dropdown {%if page == 'platforms'%}active{%endif%}">
-                                <a data-toggle="collapse" href="#dropdown-element">
+                                <a href="/platforms/">
                                     <span class="icon fa fa-desktop"></span><span class="title">Platfroms</span>
                                 </a>
                                 <!-- Dropdown level 1 -->
@@ -176,19 +176,15 @@
                                 </div>-->
                             </li>
                             {% if user.userprofile.usertype == 'CAP' %}
-                            <li class="panel panel-default dropdown {%if page == 'cap'%}active{%endif%}">
-                                <a data-toggle="collapse" href="#dropdown-form">
+                            <li class="panel panel-default dropdown {%if page == 'capmembers'%}active{%endif%}">
+                                <a href="#">
                                     <span class="icon fa fa-file-text-o"></span><span class="title">Manage College Members</span>
                                 </a>
-                                <!-- Dropdown level 1 -->
-                               <!-- <div id="dropdown-form" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <ul class="nav navbar-nav">
-                                            <li><a href="form/ui-kits.html">Form UI Kits</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> -->
+                            </li>
+                            <li class="panel panel-default dropdown {%if page == 'capplatforms'%}active{%endif%}">
+                                <a href="/viewcollegeplatforms">
+                                    <span class="icon fa fa-file-text-o"></span><span class="title">Manage College Platforms</span>
+                                </a>
                             </li>
                             {% endif %}
                             <!-- Dropdown-->

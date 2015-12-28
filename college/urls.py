@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 from authentication import views as auth
+from cap import views as capview
 
 urlpatterns = [
     url(r'^$',auth.index),
@@ -29,6 +30,9 @@ urlpatterns = [
     url(r'^manageonstage/(?P<utype>Onestage|CAP|Organization)/',auth.getusers), 
     url(r'^invitenewuser/',auth.inviteuser), 
     url(r'^newuser/(?P<utype>\w+)/(?P<password>\w+)/(?P<email>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/',auth.newuser),
-    url(r'^viewprofile/(?P<utype>\w+)/(?P<userid>[A-Za-z0-9.-]+)/',auth.viewprofile),  
+    url(r'^viewprofile/(?P<utype>\w+)/(?P<userid>[A-Za-z0-9.-]+)/',auth.viewprofile),
+    url(r'^platforms/',capview.viewplatforms),
+    url(r'^viewcollegeplatforms/',capview.viewcollegeplatforms),
+
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

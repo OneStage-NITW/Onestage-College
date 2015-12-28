@@ -1,0 +1,26 @@
+{%extends "layouts/base.html" %}
+{%block content %}
+
+<ul class="list-group">
+{%if page == 'capplatforms'%}
+	<div class="row">
+			<button type="button" class="btn btn-success col-xs-10 col-xs-offset-1">Add Platform</button>
+	</div>
+{%endif%}
+{% if platforms %}
+{% for p in platforms %}
+    <li class="list-group-item">
+    <div class="row">
+    	<div class="col-xs-6"><h4>{{ p.name }}</h4><br>{{ p.date }}</div>
+    	<div class="col-xs-6"><a type="button" class="btn btn-success col-xs-12" href="/viewplatform/{{p.id}}">View Profile</a></div>
+    </div>
+    </li>
+{% endfor %}
+{%else%}
+ <li class="list-group-item" align="center">
+    No Platforms yet
+    </li>
+{%endif%}
+</ul>
+
+{%endblock%}
