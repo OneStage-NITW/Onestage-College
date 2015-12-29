@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 def get_image_path(instance,filename):
     return 'organisation{0}'.format(instance.name)
 
+def get_image_path2(instance,filename):
+    return 'platform{0}'.format(instance.name)
+
 class Organisation(models.Model):
 	user=models.OneToOneField(User,related_name='orguser')
 	name=models.CharField(max_length=180,unique=True)
@@ -23,8 +26,9 @@ class Platform(models.Model):
 	date=models.DateField()
 	description=models.TextField()
 	venue=models.CharField(max_length=180)
-	organisations=models.ManyToManyField(Organisation,related_name="platform_orgs")
+	organisations=models.ManyToManyField(Organisation,related_name="platform_orgs",blank=True)
 	addedby=models.ForeignKey(User,related_name='platformadmin')
+	banner=models.ImageField(upload_to=get_image_path2,blank=True)
 	def __unicode__(self):
 		return self.name
 

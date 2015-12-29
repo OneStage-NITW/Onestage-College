@@ -1,4 +1,7 @@
 {%extends "layouts/base.html" %}
+{%block header%}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+{%endblock%}
 {%block content %}
 {% if message %}
 <div>
@@ -66,4 +69,12 @@
     </form>
 	</div>
 </div>
+{%endblock%}
+{%block scripts%}
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+  $(function() {
+    $( "#id_date" ).datepicker();
+  });
+  </script>
 {%endblock%}

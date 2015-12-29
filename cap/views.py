@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from cap.models import Platform
 from cap.forms import PlaformForm
+from django.http import HttpResponseRedirect,JsonResponse,HttpResponseNotFound
+
 
 # Create your views here.
 
@@ -31,9 +33,10 @@ def addplatform(request):
 			post.save()
 			return HttpResponseRedirect('/viewcollegeplatforms')
 		else:
+			print form.errors
 			response['message']='Please check the form again'
 	else:
 		form=PlaformForm()
 		response['form']=form
-		return render(request,'site/addplatform.html',response)
+	return render(request,'site/addplatform.html',response)
 
