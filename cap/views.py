@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from cap.models import Platform
+from cap.forms import PlaformForm
 
 # Create your views here.
 
@@ -23,15 +24,16 @@ def viewcollegeplatforms(request):
 def addplatform(request):
 	response={}
 	if request.method == 'POST':
-		name= request.POST['name']
-		amount=request.POST['amount']
-		logistics=request.POST['logistics']
-		date=request.POST['date']
-		description=request.POST['description']
-		venue=request.POST['venue']
-		organization=request.POST['organization']
-		addedby=request.user
-		platform=Platform(name=name,amount=amount,logistics=logistics,date=date,description=description,venue=venue,organisations=organization,addedby=addedby)
-		platform.save()
-	return render(request,'site/addplatform.html',response)
+		form=PlaformForm(request.POST)
+		if form.is_valid():
+			post=form.save(commit=False)
+			post.addedby=request.user
+			post.save()
+			return HttpResponseRedirect('/viewcollegeplatforms')
+		else:
+			response['message']='Please check the form again'
+	else:
+		form=PlaformForm()
+		response['form']=form
+		return render(request,'site/addplatform.html',response)
 

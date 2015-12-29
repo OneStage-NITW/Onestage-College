@@ -51,7 +51,7 @@
                                 {% if utype == 'Onestage' %}
                                     <input type="text" name="first_name" class="form-control" placeholder='First Name' required/>
                                 {%elif utype == 'Organisation' %}
-                                    <input type="text" name="first_name" class="form-control" placeholder='Name of Organization' required/>
+                                    <input type="text" name="first_name" class="form-control" placeholder='Name of Organisation' required/>
                                 {%else%}
                                     <input type="text" name="first_name" class="form-control" placeholder='Name of College' onkeyup="copy_data(this)" required/>
                                 {%endif%}
@@ -66,7 +66,7 @@
                                 {% if utype == 'Onestage' %}
                                     <input type="text" name="collegeName" class="form-control" placeholder='College' required/>
                                 {%elif utype == 'Organisation' %}
-                                    <input type="hidden" name="collegeName" class="form-control" value='Organization'/>
+                                    <input type="hidden" name="collegeName" class="form-control" value='Organisation'/>
                                 {%else%}
                                      <input type="hidden" name="collegeName" id="collegeName" class="form-control" value=''/>
                                 {%endif%}
@@ -80,6 +80,11 @@
                                 <div class="control">
                                     <input type="text" name="telephone" class="form-control" placeholder="Telephone" required/>
                                 </div>
+                                {%if utype == 'Organisation'%}
+                                 <div class="control">
+                                    <input type="text" name="address" class="form-control" placeholder="Address" />
+                                </div>
+                                {%endif%}
                                 <div class="control">
                                     <input type="hidden" name="email" class="form-control" value="{{email}}"/>
                                 </div>

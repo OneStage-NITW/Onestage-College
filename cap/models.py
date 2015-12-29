@@ -6,6 +6,15 @@ from django.contrib.auth.models import User
 def get_image_path(instance,filename):
     return 'organisation{0}'.format(instance.name)
 
+class Organisation(models.Model):
+	user=models.OneToOneField(User,related_name='orguser')
+	name=models.CharField(max_length=180,unique=True)
+	description=models.TextField()
+	logo=models.ImageField(upload_to=get_image_path, null=True,blank=True)
+	address=models.TextField()
+	def __unicode__(self):
+		return self.name
+
 class Platform(models.Model):
 	name = models.CharField(max_length=180)
 	date_added=models.DateTimeField(auto_now=True)
@@ -14,7 +23,7 @@ class Platform(models.Model):
 	date=models.DateField()
 	description=models.TextField()
 	venue=models.CharField(max_length=180)
-	organisations=models.CharField(max_length=300)
+	organisations=models.ManyToManyField(Organisation,related_name="platform_orgs")
 	addedby=models.ForeignKey(User,related_name='platformadmin')
 	def __unicode__(self):
 		return self.name
@@ -27,14 +36,6 @@ class PlatformDetails(models.Model):
 	no_of_people=models.CharField(max_length=180)
 	def __unicode__(self):
 		return self.platform.name
-
-class Organisation(models.Model):
-	name=models.CharField(max_length=180,unique=True)
-	description=models.TextField()
-	logo=models.ImageField(upload_to=get_image_path, null=True,blank=True)
-	address=models.TextField()
-	def __unicode__(self):
-		return self.name
 
 class Volunteers(models.Model):
 	college=models.ForeignKey(User,related_name='collegeadmin')

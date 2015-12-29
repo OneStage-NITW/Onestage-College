@@ -1,0 +1,69 @@
+{%extends "layouts/base.html" %}
+{%block content %}
+{% if message %}
+<div>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ message }}
+    </div>
+</div>
+{% endif %}
+<div class="row">
+	<h1 align="center">New Platform</h1>
+		<form method="POST">
+		    {% csrf_token %}
+		    {% load widget_tweaks %}
+	<div class="row">
+	<div class="col-xs-12">
+	<div class="col-xs-6">
+	<div class="row">
+		<div class="col-xs-12">
+		    <div class="control">
+                {{form.name|add_class:"form-control"|attr:"placeholder:Name"}}
+                {{ form.username.errors }}
+            </div>
+            <div class="control">
+                {{form.amount|add_class:"form-control"|attr:"placeholder:Amount For Logistics"}}
+                {{ form.username.errors }}
+            </div>
+            <div class="control">
+                {{form.logistics|add_class:"form-control"|attr:"placeholder:Logistics"}}
+                {{ form.username.errors }}
+            </div>
+        </div>
+    </div>
+    </div>
+   	<div class="col-xs-6">
+   	<div class="row">
+   		<div class="col-xs-12">
+            <div class="control">
+                {{form.date|add_class:"form-control"|attr:"placeholder:Date"}}
+                {{ form.username.errors }}
+            </div>
+            <div class="control">
+                {{form.description|add_class:"form-control"|attr:"placeholder:Description"}}
+                {{ form.username.errors }}
+            </div>
+            <div class="control">
+                {{form.venue|add_class:"form-control"|attr:"placeholder:Description"}}
+                {{ form.username.errors }}
+            </div>
+        </div>
+     </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-xs-12">
+    	<div class="row">
+    		<div class="control">
+                {{form.organisations|add_class:"form-control"|attr:"placeholder:Organisation"}}
+                {{ form.username.errors }}
+            </div>
+    	</div>
+    </div>
+
+	<input type="submit" class="save btn btn-success col-xs-12" value="Save Platform">
+    </form>
+	</div>
+</div>
+{%endblock%}

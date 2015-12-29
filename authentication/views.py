@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 import hashlib
 from django.core.mail import send_mail
+from cap.models import Organisation
 # Create your views here.
 
 
@@ -123,6 +124,17 @@ def newuser(request,utype,password,email):
 						userp.profilepicture='default.jpg'
 					userp.lastLoginDate=datetime.now()
 					userp.save()
+					if utype == 'Organisation':
+						org=Organisation()
+						org.user=user
+						org.name=request.POST['first_name']
+						org.description=request.POST['description']
+						if request.FILES['picture']:
+							org.logo=request.FILES['picture']
+						else:
+							org.logo='default.jpg'
+						org.address=request.POST['address']
+						org.save()
 					return HttpResponseRedirect('/login')
 				else:
 					response['message']="Password not matching"
@@ -143,9 +155,9 @@ def viewprofile(request,utype,userid):
 	except:
 		return HttpResponseNotFound('<h1>Not found</h1>')
 	if user.userprofile.usertype == utype:
-		if utype == 'Organization':
+		if utype == 'Organisation':
 			"""
-			This is the part for the Organization view
+			This is the part for the Organisation view
 			Need to show the cost made by organization and the platforms its collabarating with
 			"""
 		elif utype == 'CAP':
