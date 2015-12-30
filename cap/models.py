@@ -29,6 +29,8 @@ class Platform(models.Model):
 	organisations=models.ManyToManyField(Organisation,related_name="platform_orgs",blank=True)
 	addedby=models.ForeignKey(User,related_name='platformadmin')
 	banner=models.ImageField(upload_to=get_image_path2,blank=True)
+	lat=models.CharField(max_length=180,null=True)
+	longt=models.CharField(max_length=180,null=True)
 	def __unicode__(self):
 		return self.name
 
@@ -46,6 +48,22 @@ class Volunteers(models.Model):
 	vol=models.ForeignKey(User,related_name='volunteer')
 	def __unicode__(self):
 		return self.college.first_name+" : "+self.vol.first_name
+
+
+class OrgMap(models.Model):
+	org=models.ForeignKey(Organisation,related_name='map_orgs')
+	platform=models.ForeignKey(Platform,related_name='map_platform')
+	confirmed=models.BooleanField(default=False)
+	def __unicode__(self):
+		return self.org.name+" : "+self.platform.name
+
+class PlatformMap(models.Model):
+	platform=models.ForeignKey(Platform,related_name='pmap_platform')
+	user=models.ForeignKey(User,related_name='pmap_user')
+	confirmed=models.BooleanField(default=False)
+	def __unicode__(self):
+		return self.platform.name+" : "+self.user.first_name
+
 
 
     

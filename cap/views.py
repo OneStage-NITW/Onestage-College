@@ -30,6 +30,12 @@ def addplatform(request):
 		if form.is_valid():
 			post=form.save(commit=False)
 			post.addedby=request.user
+			post.lat=request.POST['latitude']
+			post.longt=request.POST['longitude']
+			if request.FILES['banner']:
+				post.banner=request.FILES['banner']
+			else:
+				post.banner='default.jpg'
 			post.save()
 			return HttpResponseRedirect('/viewcollegeplatforms')
 		else:

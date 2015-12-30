@@ -10,4 +10,4 @@ class PlaformForm(forms.ModelForm):
 	organisations= forms.ModelMultipleChoiceField(queryset=Organisation.objects.all(),widget=forms.CheckboxSelectMultiple(),required=False)
 	class Meta:
 		model=Platform
-		exclude=('addedby','date_added',)
+		exclude=('addedby','date_added','lat','longt',)

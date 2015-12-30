@@ -9,7 +9,8 @@ class UserProfile(models.Model):
 	TYPE_CHOICES = (
 	    ('Organisation', 'Organisation'),
 	    ('CAP', 'CAP'),
-	    ('Onestage','Onestage')
+	    ('Onestage','Onestage'),
+	    ('CAP_member','CAP_member'),
 	)
 	user = models.OneToOneField(User)
 	collegeName = models.CharField(max_length=128,default="NIT")
