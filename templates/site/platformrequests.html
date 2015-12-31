@@ -1,0 +1,35 @@
+{%extends "layouts/base.html" %}
+{%block content %}
+{%if message%}
+<div>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ message }}
+    </div>
+</div>
+{%endif%}
+<ul class="list-group">
+{% if organisations %}
+<h3 align="center">Organisation requests</h3><br>
+{% for org in organisations %}
+    <li class="list-group-item">
+    <div class="row">
+    	<div class="col-xs-6"><h4>{{ org.org.name }}</h4></div>
+    	<div class="col-xs-6">
+        {%if org.confirmed == True %}
+        <button type="button" class="btn btn-success col-xs-12">Confirmed</button>
+        {%else%}
+        <button type="button" class="btn btn-warning col-xs-12">Unconfirmed</button>
+        {%endif%}
+        </div>
+    </div>
+    </li>
+{% endfor %}
+{%else%}
+ <li class="list-group-item" align="center">
+    No Organisations yet
+    </li>
+{%endif%}
+</ul>
+
+{%endblock%}

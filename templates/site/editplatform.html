@@ -1,0 +1,118 @@
+{%extends "layouts/base.html" %}
+{%block header%}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<style type="text/css">
+     	#map { height: 100px; }
+    </style>
+{%endblock%}
+{%block content %}
+{% if message %}
+<div>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ message }}
+    </div>
+</div>
+{% endif %}
+<div class="row">
+	<h1 align="center">New Platform</h1>
+		<form method="POST" enctype="multipart/form-data">
+		    {% csrf_token %}
+		    {% load widget_tweaks %}
+	<div class="row">
+	<div class="col-xs-12">
+	<div class="col-xs-6">
+	<div class="row">
+		<div class="col-xs-12">
+		    <div class="control">
+                {{form.name|add_class:"form-control"|attr:"placeholder:Name"}}
+                {{ form.name.errors }}
+            </div>
+            <div class="control">
+                {{form.amount|add_class:"form-control"|attr:"placeholder:Amount For Logistics"}}
+                {{ form.amount.errors }}
+            </div>
+            <div class="control">
+                {{form.logistics|add_class:"form-control"|attr:"placeholder:Logistics"}}
+                {{ form.logistics.errors }}
+            </div>
+            <div class="control">
+                {{form.banner|add_class:"form-control"}}
+                {{ form.banner.errors }}
+            </div>
+        </div>
+    </div>
+    </div>
+   	<div class="col-xs-6">
+   	<div class="row">
+   		<div class="col-xs-12">
+            <div class="control">
+                {{form.date|add_class:"form-control"|attr:"placeholder:Date"}}
+                {{ form.date.errors }}
+            </div>
+            <div class="control">
+                {{form.description|add_class:"form-control"|attr:"placeholder:Description"}}
+                {{ form.description.errors }}
+            </div>
+            <div class="control">
+                {{form.venue|add_class:"form-control"|attr:"placeholder:Venue"}}
+                {{ form.venue.errors }}
+            </div>
+        </div>
+     </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-xs-12">
+    	<div class="row">
+    		<div class="control">
+                {{form.organisations|add_class:"form-control"|attr:"placeholder:Organisation"}}
+                {{ form.organisations.errors }}
+            </div>
+    	</div>
+    	<input type="hidden" id="latitude" name="latitude" value='0'>
+    	<input type="hidden" id="longitude" name="longitude" value='0'>
+    	<div id="map"></div>
+    </div>
+
+	<input type="submit" class="save btn btn-success col-xs-12" value="Save Platform">
+    <a href="/deleteplatform/{{platform.id}}" class="save btn btn-danger col-xs-12">Delete Platform</a>
+    </form>
+	</div>
+</div>
+{%endblock%}
+{%block scripts%}
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+  $(function() {
+    $( "#id_date" ).datepicker();
+  });
+  var map;
+  function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+	    center: {lat: {{platform.lat}} , lng: {{platform.longt}}},
+	    zoom: 8
+	  });
+	var myMarker = new google.maps.Marker({
+		position: new google.maps.LatLng({{platform.lat}}, {{platform.longt}}),
+		draggable: true
+	});
+
+    myMarker.setMap(map)
+
+	google.maps.event.addListener(myMarker, 'dragend', function(evt){
+	    $('#latitude').val(evt.latLng.lat().toFixed(3)); 
+	    $('#longitude').val(evt.latLng.lng().toFixed(3));
+	});
+
+	google.maps.event.addListener(myMarker, 'dragstart', function(evt){
+	    console.log("Dragging marker");
+	});
+}
+	
+
+  </script>
+  <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdO05cxef-_WzAvrEZ9TYuUlSOIjdXmw8&callback=initMap">
+  </script
+{%endblock%}

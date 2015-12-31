@@ -34,6 +34,9 @@ urlpatterns = [
     url(r'^platforms/',capview.viewplatforms),
     url(r'^viewcollegeplatforms/',capview.viewcollegeplatforms),
     url(r'^addcollegeplatforms/',capview.addplatform),
+    url(r'^editplatform/(?P<pid>[A-Za-z0-9.-]+)/',capview.editplatform),
+    url(r'^deleteplatform/(?P<pid>[A-Za-z0-9.-]+)/',capview.deleteplatform),
+    url(r'^platformrequests/(?P<pid>[A-Za-z0-9.-]+)/',capview.platformrequests),
 
 
     
