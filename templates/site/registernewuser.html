@@ -45,13 +45,15 @@
                                     Register As a {{utype}} Member
                                 </div>
                             </div>
-                            <form action="/newuser/{{utype}}/{{password}}/{{email}}/" method="post" enctype="multipart/form-data">
+                            <form action="/newuser/{{utype}}/{{password}}/{{email}}/{{capadminid}}/" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                                 <div class="control">
                                 {% if utype == 'Onestage' %}
                                     <input type="text" name="first_name" class="form-control" placeholder='First Name' required/>
                                 {%elif utype == 'Organisation' %}
                                     <input type="text" name="first_name" class="form-control" placeholder='Name of Organisation' required/>
+                                {%elif utype == 'CAP_member' %}
+                                    <input type="text" name="first_name" class="form-control" placeholder='First Name' required/>
                                 {%else%}
                                     <input type="text" name="first_name" class="form-control" placeholder='Name of College' onkeyup="copy_data(this)" required/>
                                 {%endif%}
@@ -67,6 +69,8 @@
                                     <input type="text" name="collegeName" class="form-control" placeholder='College' required/>
                                 {%elif utype == 'Organisation' %}
                                     <input type="hidden" name="collegeName" class="form-control" value='Organisation'/>
+                                {%elif utype == 'CAP_member' %}
+                                    <input type="hidden" name="collegeName" class="form-control" value='{{capadmin.userprofile.collegeName}}'/>
                                 {%else%}
                                      <input type="hidden" name="collegeName" id="collegeName" class="form-control" value=''/>
                                 {%endif%}

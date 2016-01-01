@@ -25,3 +25,9 @@ class UserProfile(models.Model):
 	phone=models.CharField(max_length=180,null=True)
 	def __unicode__(self):
 		return self.user.username
+
+class CapMember(models.Model):
+	capmember=models.ForeignKey(User,related_name='capmember')
+	capadmin=models.ForeignKey(User,related_name='capadmin')
+	def __unicode__(self):
+		return self.capmember.first_name

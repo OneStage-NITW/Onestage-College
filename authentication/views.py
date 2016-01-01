@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User,Group
-from authentication.models import UserProfile
+from authentication.models import UserProfile,CapMember
 from authentication.forms import UserForm,UserProfileForm
 from datetime import datetime
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponseNotFound
@@ -73,6 +73,9 @@ def newuser(request):
 def getusers(request,utype):
 	response={}
 	users=User.objects.filter(userprofile__usertype=utype)
+	if utype == 'CAP_member':
+		cusers=CapMember.objects.values_list('capmember', flat=True).filter(capadmin=request.user)
+		users=User.objects.filter(pk__in=set(cusers))
 	response['ousers']=users
 	response['utype']=utype
 	response['page']='onestage'
@@ -91,6 +94,8 @@ def inviteuser(request):
 		user.is_active=False
 		user.save()
 		rurl='newuser/'+utype+'/'+password+'/'+email+'/'
+		if utype == 'CAP_member':
+			rurl=rurl+str(request.user.id)+'/'
 		url='http://127.0.0.1:8000/'+rurl
 		message='Please click this link for registering: '+url
 		send_mail('Invite for new user',message,'root@onestage.com',[email],fail_silently=False)
@@ -145,6 +150,53 @@ def newuser(request,utype,password,email):
 	response['utype']=utype
 	response['password']=password
 	response['email']=email
+	return render(request,'site/registernewuser.html',response)
+
+
+def newusercap(request,utype,password,email,capadminid):
+	print "newusercap"
+	response={}
+	if request.method == "POST":
+		user=authenticate(username=email, password=password)
+		if user is not None:
+			if not user.is_active:
+				print "User is registering"
+				first_name=request.POST['first_name']
+				password=request.POST['password']
+				conpassword=request.POST['conpassword']
+				if password == conpassword:
+					user.set_password(password)
+					user.first_name=first_name
+					user.is_active=True
+					user.save()
+					userp=UserProfile()
+					userp.user=user
+					userp.collegeName=request.POST['collegeName']
+					userp.phone=request.POST['telephone']
+					userp.description=request.POST['description']
+					userp.usertype=utype
+					if request.FILES['picture']:
+						userp.profilepicture=request.FILES['picture']
+					else:
+						userp.profilepicture='default.jpg'
+					userp.lastLoginDate=datetime.now()
+					userp.save()
+					cap=CapMember()
+					cap.capadmin=User.objects.get(id=capadminid)
+					cap.capmember=user
+					cap.save()
+					return HttpResponseRedirect('/login')
+				else:
+					response['message']="Password not matching"
+			else:
+				response['message']='User already active'
+		else:
+			response['message']='User is not allowed to be registered'
+	response['utype']=utype
+	response['password']=password
+	response['email']=email
+	response['capadminid']=capadminid
+	response['capadmin']=User.objects.get(id=capadminid)
 	return render(request,'site/registernewuser.html',response)
 
 
