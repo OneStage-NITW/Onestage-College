@@ -109,5 +109,14 @@ def platformrequests(request,pid):
 	return render(request,'site/platformrequests.html',response)
 
 
+def organisationrequests(request):
+	response={}
+	print request.user.orguser
+	orgs=OrgMap.objects.filter(org=request.user.orguser)
+	response['organisations']=orgs
+	response['page']='manageorganisation'
+	return render(request,'site/vieworganisationsreq.html',response)
+
+
 
 
