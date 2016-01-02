@@ -118,5 +118,21 @@ def organisationrequests(request):
 	return render(request,'site/vieworganisationsreq.html',response)
 
 
+def orgstatus(request,orgid,confirm):
+	if confirm == 'accept':
+		org=OrgMap.objects.get(id=orgid)
+		org.confirmed = True
+		org.save()
+	else:
+		organ=OrgMap.objects.get(id=orgid)
+		plat=organ.platform
+		org=organ.org
+		organ.delete()
+		plat.organisations.remove(org)
+		plat.save()
+	return HttpResponseRedirect('/organisationrequests/')
+
+
+
 
 

@@ -4,10 +4,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 def get_image_path(instance,filename):
-    return 'organisation{0}'.format(instance.name)
+    return 'organisation{0}.jpg'.format(instance.name)
 
 def get_image_path2(instance,filename):
-    return 'platform{0}'.format(instance.name)
+    return 'platform{0}.jpg'.format(instance.name)
 
 class Organisation(models.Model):
 	user=models.OneToOneField(User,related_name='orguser')
