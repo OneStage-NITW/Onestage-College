@@ -132,6 +132,16 @@ def orgstatus(request,orgid,confirm):
 		plat.save()
 	return HttpResponseRedirect('/organisationrequests/')
 
+def platformend(request):
+	"""
+	View for rendering once the platform is over
+	"""
+
+def platformupload(request):
+	"""
+	Uploading a zip file of pictures to view on the site directly
+	"""
+
 
 
 
