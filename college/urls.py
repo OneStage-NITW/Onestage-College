@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^platformrequests/(?P<pid>[A-Za-z0-9.-]+)/',capview.platformrequests),
     url(r'^organisationrequests/$',capview.organisationrequests),
     url(r'^orgstatus/(?P<orgid>[A-Za-z0-9.-]+)/(?P<confirm>accept|reject)/$',capview.orgstatus),
+    url(r'^auditplatform/(?P<pid>[A-Za-z0-9.-]+)/$',capview.auditplatform),
 
 
     

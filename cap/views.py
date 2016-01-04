@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from cap.models import Platform,OrgMap
-from cap.forms import PlaformForm
+from cap.forms import PlaformForm, PlatformDetailsForm
 from django.http import HttpResponseRedirect,JsonResponse,HttpResponseNotFound
+from datetime import datetime
+import zipfile
+import os
+import shutil
 
 
 # Create your views here.
@@ -20,6 +24,7 @@ def viewcollegeplatforms(request):
 	response['page']='capplatforms'
 	if len(p) > 0:
 		response['platforms']=p
+	response['date']=datetime.now().date()
 	return render(request,'site/viewplatforms.html',response)
 
 
@@ -141,6 +146,56 @@ def platformupload(request):
 	"""
 	Uploading a zip file of pictures to view on the site directly
 	"""
+
+def auditplatform(request,pid):
+	"""
+	Audit: after the platform is over
+	"""
+	response={}
+	platform=Platform.objects.get(id=pid)
+	if request.method == 'POST':
+		try:
+			form=PlatformDetailsForm(request.POST,instance=platform.platformdetails)
+		except:
+			form=PlatformDetailsForm(request.POST)
+		if form.is_valid():
+			audit=form.save(commit=False)
+			audit.platform=platform
+			print audit
+			if request.FILES['upload']:
+				directory=os.path.join(os.path.dirname(__file__),'../static2/plaforms').replace('\\','/')+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)
+				if not os.path.exists(directory):
+					os.makedirs(directory)
+				print "Check 1 done"
+				z = zipfile.ZipFile(request.FILES['upload'], "r")
+				count=0
+				for name in z.namelist():
+					source = z.open(name)
+					targetname = os.path.join(os.path.dirname(__file__),'../static2/plaforms').replace('\\','/')+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)+'/'+str(count)+'.'+name.split('.')[1]
+					target=file(targetname, "wb")
+					with source, target:
+						shutil.copyfileobj(source, target)
+					count=count+1
+				audit.picture_folder=directory
+				audit.picture_number=count
+			audit.save()
+			response['message']="Added the audit details and images"
+		else:
+			print form.errors
+			response['message']=form.errors
+	try:
+		form=PlatformDetailsForm(instance=platform.platformdetails)
+		response['picture']='plaforms'+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)
+		response['piccount']=""
+		for i in range(0,platform.platformdetails.picture_number):
+			response['piccount']=response['piccount']+str(i)
+	except:
+		form=PlatformDetailsForm()
+	response['form']=form
+	response['platform']=platform
+	return render(request,'site/auditplatform.html',response)
+
+
 
 
 

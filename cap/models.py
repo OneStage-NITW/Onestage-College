@@ -40,6 +40,8 @@ class PlatformDetails(models.Model):
 	amount_collected=models.CharField(max_length=180)
 	feedback=models.TextField()
 	no_of_people=models.CharField(max_length=180)
+	picture_folder=models.CharField(max_length=180,null=True)
+	picture_number=models.IntegerField(default=0)
 	def __unicode__(self):
 		return self.platform.name
 
