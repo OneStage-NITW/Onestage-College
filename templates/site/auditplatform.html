@@ -9,6 +9,10 @@
     </div>
 </div>
 {% endif %}
+<div class="alert alert-warning" role="alert">
+    <span aria-hidden="true">&times;</span></button>
+        File should be zip and the images jpg or jpeg
+    </div>
 <div class="row">
 	<h1 align="center">Audit Platform {{platform.name}}</h1>
 		<form method="POST" enctype="multipart/form-data">
@@ -48,7 +52,7 @@
         {%for i in piccount%}
         {% with picture|add:'/'|add:i|add:'.jpg' as image_static %}
         <div class="col-sm-3">
-            <img class="img-thumbnail img-responsive" src="{%static image_static %}" style="max-width: 100%; height: 200px;position:relative;float:left">
+            <img class="img-thumbnail img-responsive" src="{%static image_static %}" style="max-width: 100%; height: 200px;position:relative;float:left;">
         </div>
         {%endwith%}
         {%endfor%}
