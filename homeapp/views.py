@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 
 def rendercappage(request,capid):
-	"""We will be redering the cap page here"""
+	"""We will be redering the cap page here. working on it """
