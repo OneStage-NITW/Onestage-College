@@ -9,3 +9,13 @@ def home(request):
 def rendercappage(request,capid):
 	"""We will be redering the cap page here. working on it """
 	
+def renderblog(request,blogid):
+	"""Blog post rendering goes here"""
+
+
+def rendergallery(request,platformid):
+	"""Plaatform gallery goes here """
+
+
+def renderplatform(request,platformid):
+	"""Rendering plaform goes here """
