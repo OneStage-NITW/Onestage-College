@@ -1,5 +1,6 @@
 {%extends "homeapp/layouts/base.html" %}
 {%block content %}
+{% load staticfiles %}
 <section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
 							<h1>OneStage</h1>
@@ -14,7 +15,7 @@
 				<!-- One -->
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
-							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<a href="#" class="image"><img src="{%static 'homeapp/images/pic01.jpg' %}" alt="" data-position="center center" /></a>
 							<div class="content">
 								<div class="inner">
 									<h2>Sed ipsum dolor</h2>
@@ -26,7 +27,7 @@
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<a href="#" class="image"><img src="{%static 'homeapp/images/pic02.jpg' %}" alt="" data-position="top center" /></a>
 							<div class="content">
 								<div class="inner">
 									<h2>Feugiat consequat</h2>
@@ -38,7 +39,7 @@
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<a href="#" class="image"><img src="{%static 'homeapp/images/pic03.jpg' %}" alt="" data-position="25% 25%" /></a>
 							<div class="content">
 								<div class="inner">
 									<h2>Ultricies aliquam</h2>
