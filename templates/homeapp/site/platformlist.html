@@ -1,0 +1,32 @@
+{%extends "homeapp/layouts/base.html" %}
+{%block content %}
+{% load staticfiles %}
+<div align="center">
+<section id="one" class="wrapper style2 spotlights">
+<br>
+<h2>Platforms by OneStage</h2>
+{%for p in platforms %}
+						<section>
+							<a href="#" class="image"><time datetime="2014-09-20" class="icon">
+							 <em>{{p.date|date:'l'}}</em>
+							  <strong>{{p.date|date:'F'}}</strong>
+							  <span>{{p.date|date:'d'}}</span>
+							</time></a>
+							<div class="content">
+								<div class="inner">
+									<h2 style="text-transform: uppercase;
+}">{{p.name}}</h2>
+									<p>{{p.description}}
+										<br>
+										<b>Venue: </b>{{p.venue}}
+									</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+{%endfor%}
+</section>
+</div>
+{%endblock%}

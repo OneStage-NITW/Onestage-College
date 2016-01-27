@@ -35,3 +35,11 @@ def renderplatform(request,platformid):
 	p=Platform.objects.get(id=platformid)
 	response={}
 	return render(request,'homeapp/site/platform.html',response)
+
+
+def platforms(request):
+	p=Platform.objects.all()
+	response={}
+	response['platforms']=p
+	response['page']='platform'
+	return render(request,'homeapp/site/platformlist.html',response)
