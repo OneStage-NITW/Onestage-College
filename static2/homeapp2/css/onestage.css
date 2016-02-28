@@ -1,0 +1,17 @@
+#logo-container{    
+    height: 200px;
+}
+#front-page-logo {
+    display: inline-block;
+    height: 100%;
+    pointer-events: none;
+    padding-top: 20px;
+}
+
+main, footer {
+    padding-left: 8%;
+}
+
+.slider{
+	height: 10%;
+}
