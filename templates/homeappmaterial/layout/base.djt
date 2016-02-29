@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'homeapp2/css/materialize.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'homeapp2/css/onestage.css' %}">
 </head>
-<body>
+<body class="purple lighten-1">
 <header>
   <ul id="slide-out" class="side-nav fixed">
   	<li class="logo purple"><a id="logo-container" href="#" class="brand-logo" align="center"><img id="front-page-logo" src="{%static 'homeapp/assets/img/logo.png' %}"></a></li>

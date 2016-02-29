@@ -15,3 +15,41 @@ main, footer {
 .slider{
 	height: 10%;
 }
+
+
+
+.o-outer {
+    float: left;
+    position: relative;
+    padding: 20%;
+    margin: 4.33% -3% 0 0;
+    opacity: 0.5;
+}
+.o {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    overflow: hidden;
+    z-index: 20;
+}
+.o:before {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    transform: rotate(45deg);
+    background: #7E3C7E;
+    content: '';
+}
+
+
+.oinner {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    overflow: hidden;
+    z-index: 10;
+}
+.oinner:before {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    transform: rotate(45deg);
+    background: white;
+    content: '';
+}
