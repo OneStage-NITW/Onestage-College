@@ -8,25 +8,39 @@
 </head>
 <body>
  <div class="slider fullscreen">
-    <ul class="slides blue darken-3">
-      <li class="blue blue darken-3">
+    <ul class="slides blue indigo darken-4">
+      <li class="indigo darken-4 row">
         <div class="caption center-align">
-        <div class="row">
-          <div class="col s6"><img src="{% static 'homeapp2/img/onelogo.png" style="width: 100%"></div>
-          <div class="col s6"><img src="{% static 'homeapp2/img/onelogo.png" style="width: 100%"></div>
+          <div class="col s12 m6 l6" >
+          <img src="{% static 'homeapp2/img/logo.png' %}" style="width:100%;height:50%;">
+          </div>
+          <div class="col s12 m6 l6">
+            <h4>Welcome to</h4>
+            <h1><b>Onestage</b></h1>
+            <p>A social startup aimed at giving differently-abled people an opportunity to showcase their talents and provide support in terms of platforms and money. We have conducted more that 10 platforms in over 6 colleges across India</p>
+            <a class="waves-effect waves-light btn-large">Know More</a>
+          </div>
+        </div>
+      </li>
+      <li class="indigo darken-4">
+        <div class="caption left-align row">
+        <div class="col s12 m6 l6">
+          <img src="{% static 'homeapp2/img/slide1.jpg' %}" style="width: 100%; height:100%">
+        </div>
+        <div class="col s12 m6 l6">
+          <h3>Platforms: Providing a stage for talents</h3>
+          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
         </div>
         </div>
       </li>
-      <li>
-        <div class="caption left-align">
-          <h3>Left Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+      <li class="indigo darken-4">
+        <div class="caption right-align row">
+        <div class="col s12 m6 l6">
         </div>
-      </li>
-      <li>
-        <div class="caption right-align">
-          <h3>Right Aligned Caption</h3>
-          <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        <div class="col s12 m6 l6">
+          <h3>Want to join us ?</h3>
+            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        </div>
         </div>
       </li>
     </ul>
@@ -36,7 +50,10 @@
 <script type="text/javascript">
   $(document).ready(function(){
       $('.slider').slider({full_width: true});
+      $('.slider').slider('pause');
+        
     });
+
 </script>
 </body>
 </html>
