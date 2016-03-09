@@ -1,0 +1,14 @@
+{%extends 'homeappmaterial/layout/base.djt' %}
+{% load homeapp_extra %}
+{%block content%}
+<div align="center">
+<h2>{{platform.name}}</h2>
+{%if platform.platformdetails %}
+{% num_range platform.platformdetails.picture_number as some_range %}
+{% for i in some_range %}
+  {{ i }}: Something I want to repeat\n
+{% endfor %}
+{{platform.platformdetails.picture_folder}}
+{%endif%}
+</div>
+{%endblock%}

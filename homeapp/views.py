@@ -34,12 +34,23 @@ def rendergallery(request,platformid):
 def renderplatform(request,platformid):
 	p=Platform.objects.get(id=platformid)
 	response={}
-	return render(request,'homeapp/site/platform.html',response)
+	response['platform']=p
+	response['page']='platform'
+	if platform.platformdetails:
+		l=int(platform.platformdetails.picture_number)
+	return render(request,'homeappmaterial/site/platformdesp.html',response)
 
 
 def platforms(request):
-	p=Platform.objects.all()
+	p=Platform.objects.all().order_by('-date')
 	response={}
 	response['platforms']=p
 	response['page']='platform'
-	return render(request,'homeapp/site/platformlist.html',response)
+	return render(request,'homeappmaterial/site/platforms.html',response)
+
+
+def aboutus(request):
+	return render(request,'homeappmaterial/site/aboutus.html',{'page': 'aboutus'})
+
+def mission(request):
+	return render(request,'homeappmaterial/site/mission.html',{'page': 'mission'})

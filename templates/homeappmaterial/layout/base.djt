@@ -6,15 +6,16 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'homeapp2/css/materialize.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'homeapp2/css/onestage.css' %}">
 </head>
-<body class="blue darken-1">
+<body >
 <header>
   <ul id="slide-out" class="side-nav fixed">
   	<li class="logo blue"><a id="logo-container" href="#" class="brand-logo" align="center"><img id="front-page-logo" src="{%static 'homeapp/assets/img/logo.png' %}"></a></li>
-  	<li class="active blue"><a href="#!" class="white-text">Home</a></li>
-    <li><a href="#!">Platforms</a></li>
-    <li><a href="#!">Organizations</a></li>
-    <li><a href="#!">Campuses</a></li>
-    <li><a href="#!">About Us</a></li>
+  	<li {%if page == 'home' %}class="active blue"{%endif%}><a href="/index/" {%if page == 'home' %}class="white-text"{%endif%}>Home</a></li>
+    <li {%if page == 'platforms' %}class="active blue"{%endif%}><a href="index/platforms" {%if page == 'platforms' %}class="white-text"{%endif%}>Platforms</a></li>
+    <li {%if page == 'organizations' %}class="active blue"{%endif%}><a href="/index/organizations" {%if page == 'organizations' %}class="white-text"{%endif%}>Organizations</a></li>
+    <li {%if page == 'campuses' %}class="active blue"{%endif%}><a href="/index/campuses" {%if page == 'campuses' %}class="white-text"{%endif%}>Campuses</a></li>
+    <li {%if page == 'mission' %}class="active blue"{%endif%}><a href="/index/mission" {%if page == 'mission' %}class="white-text"{%endif%}>Mission</a></li>
+    <li {%if page == 'aboutus' %}class="active blue"{%endif%}><a href="/index/aboutus" {%if page == 'aboutus' %}class="white-text"{%endif%}>About Us</a></li>
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 </header>

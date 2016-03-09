@@ -1,0 +1,30 @@
+{%extends 'homeappmaterial/layout/base.djt' %}
+
+
+{%block content%}
+<div align="center">
+<h2>Platforms by Onestage</h2>
+{%for p in platforms %}
+{% if forloop.counter0|divisibleby:2 %}
+<div class="row" align="left">
+{%endif%}
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{p.name}}</span>
+              <p>{{p.description}}</p>
+            </div>
+            <div class="card-action">
+              <a href="#">{{p.date}}</a>
+              <a href="/index/viewplatform/{{p.id}}">View more info</a>
+            </div>
+          </div>
+        </div>
+{% if forloop.counter|divisibleby:2 %}
+</div>
+{%endif%}
+{% empty %}
+  <h2>Platforms. Coming soon </h2>
+{%endfor%}
+</div>
+{%endblock%}
