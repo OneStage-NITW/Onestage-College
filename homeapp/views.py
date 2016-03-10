@@ -2,6 +2,7 @@ from django.shortcuts import render
 from cap.models import *
 from authentication.models import *
 from django.contrib.auth.models import User
+import os
 
 # Create your views here.
 
@@ -36,8 +37,17 @@ def renderplatform(request,platformid):
 	response={}
 	response['platform']=p
 	response['page']='platform'
-	if platform.platformdetails:
-		l=int(platform.platformdetails.picture_number)
+	if p.platformdetails:
+		l=[]
+		index=p.platformdetails.picture_folder.find("plaforms")
+		picturepath=p.platformdetails.picture_folder[index:len(p.platformdetails.picture_folder)+1]
+		picturepath="/static/"+picturepath
+		for i in range(0,p.platformdetails.picture_number):
+			if os.path.isfile(p.platformdetails.picture_folder+"/"+str(i)+'.jpg'):
+				l.append(picturepath+"/"+str(i)+".jpg")
+			else:
+				l.append(picturepath+"/"+str(i)+".png")
+		response['numberarray']=l
 	return render(request,'homeappmaterial/site/platformdesp.html',response)
 
 

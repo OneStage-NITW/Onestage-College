@@ -6,6 +6,9 @@ class RangeNode(Node):
     def __init__(self, num, context_name):
         self.num, self.context_name = num, context_name
     def render(self, context):
+        print self
+        print self.num
+        print "=============================="
         context[self.context_name] = range(int(self.num))
         return ""
         

@@ -1,14 +1,50 @@
 {%extends 'homeappmaterial/layout/base.djt' %}
+{% load staticfiles %}
 {% load homeapp_extra %}
 {%block content%}
 <div align="center">
 <h2>{{platform.name}}</h2>
+<div class="row">
+  <div class="col s12 m6 l6">
+    <img src="/media/{{platform.banner}}" class="responsive-img">
+  </div>
+  <div class="col s12 m6 l6">
+    {{platform.description}}
+    <br>
+    <a class="waves-effect waves-light btn">Venue: {{platform.venue}}</a>
+  </div>
+</div>  
+<br>
+<br>
 {%if platform.platformdetails %}
-{% num_range platform.platformdetails.picture_number as some_range %}
-{% for i in some_range %}
-  {{ i }}: Something I want to repeat\n
-{% endfor %}
-{{platform.platformdetails.picture_folder}}
+<a id="galleryshow" class="waves-effect waves-light btn col s12 m12 l12">View Gallery</a>
+<div class="slider">
+    <ul class="slides">
+     {%for i in numberarray%}
+      <li>
+        <img src="{{i}}"> <!-- random image -->
+      </li>
+    {%endfor%}
+    </ul>
+  </div>
+      
 {%endif%}
 </div>
 {%endblock%}
+{%block scripts %}
+<script type="text/javascript">
+ $(document).ready(function(){
+      $('.slider').slider();
+      $('.slider').hide();
+    });
+ $('#galleryshow').click(function(){
+    $(this).hide();
+    $('.slider').show();
+ })
+</script>
+{%endblock%}
+
+      <!--<div class="row">
+      <div class="carousel carousel-slider">
+      </div>
+      </div>-->
