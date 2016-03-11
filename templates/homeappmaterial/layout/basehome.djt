@@ -5,7 +5,7 @@
 	<title>Onestage</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'homeapp2/css/materialize.min.css' %}">
 </head>
-<body>
+<body style="overflow-x: hidden; ">
 <div class="navbar-fixed">
  <nav class="indigo darken-3 ">
   <a style="height: 100%; padding-top: 0.5%;padding-left: 2%; padding-bottom: 1%;" href="#" class="brand-logo"><img style="height: 100%;" src="{%static 'homeapp/assets/img/logo.png' %}"></a>
@@ -20,6 +20,15 @@
     
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  <ul id="slide-out" class="side-nav">
+    <li {%if page == 'home' %}class="active blue"{%endif%}><a href="/index/" {%if page == 'home' %}class="white-text"{%endif%}>Home</a></li>
+    <li {%if page == 'aboutus' %}class="active blue"{%endif%}><a href="/index/aboutus" {%if page == 'aboutus' %}class="white-text"{%endif%}>About Us</a></li>
+    <li {%if page == 'mission' %}class="active blue"{%endif%}><a href="/index/mission" {%if page == 'mission' %}class="white-text"{%endif%}>Mission</a></li>
+    <li {%if page == 'platforms' %}class="active blue"{%endif%}><a href="/index/platforms" {%if page == 'platforms' %}class="white-text"{%endif%}>Platforms</a></li>
+    <li {%if page == 'organizations' %}class="active blue"{%endif%}><a href="/index/organizations" {%if page == 'organizations' %}class="white-text"{%endif%}>Organizations</a></li>
+    <li {%if page == 'campuses' %}class="active blue"{%endif%}><a href="/index/campuses" {%if page == 'campuses' %}class="white-text"{%endif%}>Campuses</a></li>
+    <li {%if page == 'teampage' %}class="active blue"{%endif%}><a href="/index/team" {%if page == 'teampage' %}class="white-text"{%endif%}>Team</a></li>
+  </ul>
   </nav>
 </div>
 <div style="height: 100vh;" class="indigo darken-3">
@@ -29,7 +38,7 @@
       <h5>Welcome to</h5>
       <h1>Onestage</h1>
       <p> A social startup aimed at giving differently-abled people an opportunity to showcase their talents and provide support in terms of platforms and money</p> 
-      <a href="/index/" class="waves-effect waves-light btn" style="width: 100%;">Know more</a>
+      <a href="/index/aboutus" class="waves-effect waves-light btn" style="width: 100%;">Know more</a>
     </div>
     <div class="col s12 l6 m6">
       <img src="{% static 'homeapp2/img/logo.png' %}" class="responsive-img">
@@ -44,13 +53,13 @@
       <h4>We conduct Talent Platforms</h4>
       <img class="responsive-img" style="width: 50%;" src="{% static 'homeapp2/img/mic.png' %}">
       <p>Our platforms aim at providing a stage to differently abled people who want to showcase their talents to the world</p> 
-      <a class="waves-effect waves-light btn" style="width: 100%;">Know more about Platforms</a>
+      <a class="waves-effect waves-light btn" style="width: 100%;" href="/index/platforms">Know more about Platforms</a>
     </div>
     <div class="col s12 l6 m6" align="center">
        <h4>We provide a helping hand</h4>
       <img class="responsive-img" style="width: 63%;" src="{% static 'homeapp2/img/help.png' %}">
       <p>We provide help to local organizations which support differently abled people and also differently abled people around us.</p> 
-      <a class="waves-effect waves-light btn" style="width: 100%;">Know more about Organizations</a>
+      <a class="waves-effect waves-light btn" style="width: 100%;" href="/index/organisations">Know more about Organizations</a>
     </div>
   </div>
 </div>
@@ -61,7 +70,7 @@
     <div class="col s12 m4 l4" style="padding-top: 5%;">
       <h4>Check out our recent projects</h4>
       <p>Here are some of our recent projects. You can check out more of our ventures and platform details here</p>
-      <a class="waves-effect waves-light btn" style="width: 100%;">Know more about our Ventures</a>
+      <a class="waves-effect waves-light btn" style="width: 100%;" href="/index/platforms">Know more</a>
     </div>
     <div class="col s12 m4 l4" style="padding-top: 10%;">
       <img class="materialboxed responsive-img" src="{% static 'homeapp2/img/DSC_0069_1600x1067.JPG' %}">
@@ -101,7 +110,7 @@
       </form>
     </div>
     <div class="col s12 l6 m6">
-      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;height:500px;width:600px;"><div id="gmap_canvas" style="height:500px;width:600px;"><a class="google-map-code" href="http://www.map-embed.com" id="get-map-data">map-embed.com</a><style>#gmap_canvas img{max-width:none!important;background:none!important}</style><a class="google-map-code" href="http://www.themecircle.net" id="get-map-data">wordpress themes</a></div><script type="text/javascript"> function init_map(){var myOptions = {zoom:17,center:new google.maps.LatLng(17.98369011066573,79.52997897063904),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(17.98369011066573, 79.52997897063904)});infowindow = new google.maps.InfoWindow({content:"<b>NIT Warangal</b><br/>Hanamkonda<br/>506004 Warangal" });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script><div style="overflow:hidden;width: 100%;"><div id="gmap_canvas" style="height:500px;width:600px;"><a class="google-map-code" href="http://www.map-embed.com" id="get-map-data">map-embed.com</a><style>#gmap_canvas img{max-width:none!important;background:none!important}</style><a class="google-map-code" href="http://www.themecircle.net" id="get-map-data">wordpress themes</a></div><script type="text/javascript"> function init_map(){var myOptions = {zoom:17,center:new google.maps.LatLng(17.98369011066573,79.52997897063904),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(17.98369011066573, 79.52997897063904)});infowindow = new google.maps.InfoWindow({content:"<b>NIT Warangal</b><br/>Hanamkonda<br/>506004 Warangal" });google.maps.event.addListener(marker, "click", function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
 
     </div>
   </div>
@@ -142,6 +151,16 @@
      
         
     });
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-75026737-1', 'auto');
+  ga('send', 'pageview');
 
 </script>
 </body>

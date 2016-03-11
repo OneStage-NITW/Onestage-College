@@ -10,6 +10,7 @@ from django.contrib import messages
 import hashlib
 from django.core.mail import send_mail
 from cap.models import Organisation
+import constants
 # Create your views here.
 
 
@@ -96,7 +97,7 @@ def inviteuser(request):
 		rurl='newuser/'+utype+'/'+password+'/'+email+'/'
 		if utype == 'CAP_member':
 			rurl=rurl+str(request.user.id)+'/'
-		url='http://127.0.0.1:8000/'+rurl
+		url=constants.BASE_URL+rurl
 		message='Please click this link for registering: '+url
 		send_mail('Invite for new user',message,'root@onestage.com',[email],fail_silently=False)
 		response['success']=1

@@ -1,4 +1,5 @@
 college/settings.py
 college/*.pyc
-authentication/*.pyc
 cap/*.pyc
+authentication/*.pyc
+*.pyc
