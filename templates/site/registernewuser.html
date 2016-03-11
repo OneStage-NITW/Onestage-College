@@ -45,7 +45,7 @@
                                     Register As a {{utype}} Member
                                 </div>
                             </div>
-                            <form action="/newuser/{{utype}}/{{password}}/{{email}}/{{capadminid}}/" method="post" enctype="multipart/form-data">
+                            <form action="/newuser/{{utype}}/{{password}}/{{email}}/{%if utype == 'CAP_member' %}{{capadminid}}/{%endif%}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                                 <div class="control">
                                 {% if utype == 'Onestage' %}
