@@ -8,16 +8,21 @@
 </head>
 <body >
 <header>
-  <ul id="slide-out" class="side-nav fixed">
-  	<li class="logo blue"><a id="logo-container" href="#" class="brand-logo" align="center"><img id="front-page-logo" src="{%static 'homeapp/assets/img/logo.png' %}"></a></li>
+<div class="navbar-fixed">
+ <nav class="indigo darken-3 ">
+  <a style="height: 100%; padding-top: 0.5%;padding-left: 2%; padding-bottom: 1%;" href="#" class="brand-logo"><img style="height: 100%;" src="{%static 'homeapp/assets/img/logo.png' %}"></a>
+  <ul id="nav-mobile" class="right hide-on-med-and-down">
   	<li {%if page == 'home' %}class="active blue"{%endif%}><a href="/index/" {%if page == 'home' %}class="white-text"{%endif%}>Home</a></li>
-    <li {%if page == 'platforms' %}class="active blue"{%endif%}><a href="index/platforms" {%if page == 'platforms' %}class="white-text"{%endif%}>Platforms</a></li>
-    <li {%if page == 'organizations' %}class="active blue"{%endif%}><a href="/index/organizations" {%if page == 'organizations' %}class="white-text"{%endif%}>Organizations</a></li>
-    <li {%if page == 'campuses' %}class="active blue"{%endif%}><a href="/index/campuses" {%if page == 'campuses' %}class="white-text"{%endif%}>Campuses</a></li>
-    <li {%if page == 'mission' %}class="active blue"{%endif%}><a href="/index/mission" {%if page == 'mission' %}class="white-text"{%endif%}>Mission</a></li>
     <li {%if page == 'aboutus' %}class="active blue"{%endif%}><a href="/index/aboutus" {%if page == 'aboutus' %}class="white-text"{%endif%}>About Us</a></li>
+    <li {%if page == 'mission' %}class="active blue"{%endif%}><a href="/index/mission" {%if page == 'mission' %}class="white-text"{%endif%}>Mission</a></li>
+    <li {%if page == 'platforms' %}class="active blue"{%endif%}><a href="/index/platforms" {%if page == 'platforms' %}class="white-text"{%endif%}>Platforms</a></li>
+    <li {%if page == 'organisations' %}class="active blue"{%endif%}><a href="/index/organisations" {%if page == 'organisations' %}class="white-text"{%endif%}>Organizations</a></li>
+    <li {%if page == 'campuses' %}class="active blue"{%endif%}><a href="/index/campuses" {%if page == 'campuses' %}class="white-text"{%endif%}>Campuses</a></li>
+    <li {%if page == 'teampage' %}class="active blue"{%endif%}><a href="/index/team" {%if page == 'teampage' %}class="white-text"{%endif%}>Team</a></li>
   </ul>
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  </nav>
+</div>
 </header>
 <main>
 	<div class="container">
@@ -25,6 +30,30 @@
 	{%endblock%}
 	</div>
 </main>
+<footer class="page-footer indigo darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Here are some quick links</h5>
+                <p class="grey-text text-lighten-4">Navigate through the site quickly here</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="/index/platforms/">Platforms</a></li>
+                  <li><a class="grey-text text-lighten-3" href="/index/organisations">Organisations</a></li>
+                  <li><a class="grey-text text-lighten-3" href="/index/aboutus">About Us</a></li>
+                  <li><a class="grey-text text-lighten-3" href="/index/team/">The Team</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2016 Copyright Text
+            </div>
+          </div>
+        </footer>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="{% static 'homeapp2/js/materialize.min.js' %}"></script>
 {%block scripts%}

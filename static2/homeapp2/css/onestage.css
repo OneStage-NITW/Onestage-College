@@ -1,3 +1,13 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
 #logo-container{    
     height: 200px;
 }
@@ -8,15 +18,14 @@
     padding-top: 20px;
 }
 
-main, footer {
-    padding-left: 8%;
-}
 
 .slider{
 	height: 10%;
 }
 
-
+.container{
+    width: 90%;
+}
 
 .o-outer {
     float: left;

@@ -8,5 +8,8 @@ urlpatterns = [
     url(r'^viewplatform/(?P<platformid>.+)$', views.renderplatform),
     url(r'^aboutus/$',views.aboutus),
     url(r'^mission/$',views.mission),
+    url(r'^organisations/$',views.organisations),
+    url(r'^campuses/$',views.campuses),
+    url(r'^team/$',views.teampage),
 ]
 

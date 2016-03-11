@@ -8,7 +8,7 @@ import os
 
 
 def home(request):
-	return render(request,'homeappmaterial/site/home.djt',{})
+	return render(request,'homeappmaterial/site/home.djt',{'page':'home'})
 
 def rendercappage(request,capid):
 	"""We will be redering the cap page here. working on it """
@@ -55,7 +55,7 @@ def platforms(request):
 	p=Platform.objects.all().order_by('-date')
 	response={}
 	response['platforms']=p
-	response['page']='platform'
+	response['page']='platforms'
 	return render(request,'homeappmaterial/site/platforms.html',response)
 
 
@@ -64,3 +64,12 @@ def aboutus(request):
 
 def mission(request):
 	return render(request,'homeappmaterial/site/mission.html',{'page': 'mission'})
+
+def organisations(request):
+	return render(request,'homeappmaterial/site/organisations.html',{'page': 'organisations'})
+
+def campuses(request):
+	return render(request,'homeappmaterial/site/campuses.html',{'page': 'campuses'})
+
+def teampage(request):
+	return render(request,'homeappmaterial/site/team.html',{'page': 'teampage'})
