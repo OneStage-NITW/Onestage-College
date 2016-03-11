@@ -163,7 +163,7 @@ def auditplatform(request,pid):
 			audit.platform=platform
 			print audit
 			if request.FILES['upload']:
-				directory=os.path.join(os.path.dirname(__file__),'../static2/plaforms').replace('\\','/')+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)
+				directory=os.path.join(os.path.dirname(__file__),'../static/plaforms').replace('\\','/')+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)
 				if not os.path.exists(directory):
 					os.makedirs(directory)
 				print "Check 1 done"
@@ -171,7 +171,7 @@ def auditplatform(request,pid):
 				count=0
 				for name in z.namelist():
 					source = z.open(name)
-					targetname = os.path.join(os.path.dirname(__file__),'../static2/plaforms').replace('\\','/')+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)+'/'+str(count)+'.'+name.split('.')[1]
+					targetname = os.path.join(os.path.dirname(__file__),'../static/plaforms').replace('\\','/')+'/'+request.user.userprofile.collegeName+'/'+str(platform.id)+'/'+str(count)+'.'+name.split('.')[1]
 					target=file(targetname, "wb")
 					with source, target:
 						shutil.copyfileobj(source, target)
