@@ -20,9 +20,10 @@ from django.conf.urls.static import static
 from django.conf import settings
 from authentication import views as auth
 from cap import views as capview
+from django.views.generic import RedirectView
 
 urlpatterns = [
-    url(r'^$',auth.index),
+    url(r'^$',RedirectView.as_view(url="/index/")),
     url(r'^admin/', admin.site.urls),
     url(r'^login/',auth.loginuser),
     url(r'^logout/',auth.logoutuser),
