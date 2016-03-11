@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^organisations/$',views.organisations),
     url(r'^campuses/$',views.campuses),
     url(r'^team/$',views.teampage),
+    url(r'^sendfeedback/$',views.sendfeedback),
 ]
 

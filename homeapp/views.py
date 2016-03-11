@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from cap.models import *
 from authentication.models import *
+from django.core.mail import EmailMessage
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 import os
 
 # Create your views here.
@@ -73,3 +75,12 @@ def campuses(request):
 
 def teampage(request):
 	return render(request,'homeappmaterial/site/team.html',{'page': 'teampage'})
+
+
+def sendfeedback(request):
+	if request.method == 'POST':
+		subject="Feedback: "+request.POST['firstname']+" : "+request.POST['email']
+		body=request.POST['message']
+		email = EmailMessage(subject, body, to=['vivekhtc25@gmail.com'])
+		email.send()
+	return HttpResponseRedirect('/index/')
