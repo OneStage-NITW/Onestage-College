@@ -2,4 +2,5 @@ college/settings.py
 college/*.pyc
 cap/*.pyc
 authentication/*.pyc
+homeapp/*.pyc
 *.pyc

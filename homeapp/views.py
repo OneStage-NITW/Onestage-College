@@ -81,6 +81,10 @@ def sendfeedback(request):
 	if request.method == 'POST':
 		subject="Feedback: "+request.POST['firstname']+" : "+request.POST['email']
 		body=request.POST['message']
-		email = EmailMessage(subject, body, to=['vivekhtc25@gmail.com'])
+		email = EmailMessage(subject, body, to=['onestagenitwweb@gmail'])
 		email.send()
 	return HttpResponseRedirect('/index/')
+
+
+def reveal(request):
+	return render(request,'homeappmaterial/layout/reveal.djt',{})
