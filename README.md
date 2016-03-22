@@ -21,4 +21,6 @@ You are ready to go
 
 Current apps : authentication,cap,homeapp
 
-Currently completed: CAP invites, registrations and organisation requests
+Currently completed: Base Site, CAP invites, registrations and organisation requests
+
+Our site is hosted at www.onestage.org Please check it out and offer feedback.
