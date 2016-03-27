@@ -19,7 +19,7 @@
     <li class="list-group-item">
     <div class="row">
     	<div class="col-xs-6"><h4>{{ p.name }}</h4><br>{{ p.date }}</div>
-    	<div class="col-xs-2"><a type="button" class="btn btn-success col-xs-12" href="/viewplatform/{{p.id}}">View Platform</a></div>
+    	<div class="col-xs-2"><a type="button" class="btn btn-success col-xs-12" href="/index/viewplatform/{{p.id}}">View Platform</a></div>
         {%if p.date > date %}
         <div class="col-xs-2"><a type="button" class="btn btn-warning col-xs-12" href="/editplatform/{{p.id}}">Edit Platform</a></div>
         {%else%}
